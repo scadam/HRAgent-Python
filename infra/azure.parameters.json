@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceBaseName": {
+      "value": "${{AZURE_FUNCTION_BASE_NAME}}"
+    },
+    "location": {
+      "value": "${{AZURE_LOCATION}}"
+    },
+    "functionAppSKU": {
+      "value": "${{AZURE_FUNCTION_SKU}}"
+    },
+    "instanceMemoryMB": {
+      "value": "${{AZURE_FUNCTION_INSTANCE_MEMORY_MB}}"
+    },
+    "maximumInstanceCount": {
+      "value": "${{AZURE_FUNCTION_MAXIMUM_INSTANCE_COUNT}}"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+    "success": true,
+    "content": [
+        {
+            "id": "e002de0578491012383b800359d903bf",
+            "descriptor": "Introduction to Workday Learning",
+            "description": "<p>Understand all the basics of the new Workday Learning product!</p>",
+            "contentNumber": "Learning100",
+            "contentURL": "https://impl.workday.com/microsoft_dpt6/email-universal/inst/15972$1/rel-task/2998$26720.htmld",
+            "createdOnDate": "2017-02-13",
+            "contentType": "Course Offering",
+            "contentProvider": "Internal",
+            "accessType": "Requires Enrollment",
+            "deliveryMode": "Hybrid",
+            "skillLevel": "Beginner",
+            "lifecycleStatus": "Active",
+            "availabilityStatus": "Closed",
+            "excludeFromRecommendations": false,
+            "excludeFromSearchAndBrowse": false,
+            "learningCatalogs": [],
+            "languages": [],
+            "skills": [],
+            "topics": ["Workday Learning"],
+            "securityCategories": [],
+            "contactPersons": ["Logan McNeil"],
+            "imageURL": "/microsoft_dpt6/attachment/1055$1031/R1pEYXJNVUxGY0RROU5nNndDb3A1aVpzOW5EZUkvMnZJSHFmV3FjMTEwMzkxQmlrRkZjVi9rT2FxdXYwOURrem43ejd4ZE9lRmJJYm8zS0xuRTVOSit1VTE5TTN1bGtCeG04VTN6WG93K0NsSDAzNjFnMUloVnhLN2RPVnNkWGZaUHdWVi8zTDNIOEFwc0M3UWpUc05BUGs4Z1NxMW95YWlHc2dndmpJamFDRmhxc2h3NnZwdkh3NDVZamJ0dmJudGtaclJMRDFKQW40WVVTM094UXgydzc4dll1eUpMT2VWQkE4bEVyMndkUkNySS9nRTZkMjYvdmg2V3BaK0hQc1FFKzFEOUJybThmWml0Zk51elJVeHBTWWNCak9VVDFGdmpLSEpma3l3NnVaZ1haTTY1RDJiRFQ0d0d6ZUlBMUR0aFVwV09RMG9zUGFuZjNaVituNHV3PT0_b21zLWF0dGFjaG1lbnRzLzUzMDIzMTI4LTQxMDctNDkxZS0yNzIxLTZlNjUxMzU2MmU3ZT8xNzU5NjE5NzAwMDAwP2ltYWdlL2pwZWc_SW50cm9kdWN0aW9uIHRvIExlYXJuaW5nIC0gQ292ZXIgSW1hZ2UgKE5ldykuanBnOzEzLDcsMjU3LDE0NA",
+            "lessons": [
+                {
+                    "id": "e002de0578491012383b80eddbde03c2",
+                    "descriptor": "Workday Learning Vision",
+                    "description": "<p>Our original promotional video to introduce Workday Learning!</p>",
+                    "order": "1",
+                    "required": true,
+                    "contentType": "Media",
+                    "duration": "5 minutes",
+                    "instructors": [],
+                    "materials": []
+                },
+                {
+                    "id": "e002de0578491012383b811bcd0803c4",
+                    "descriptor": "Foundations of Learning",
+                    "description": "<p>Lesson 1 of the Workday Learning \"Foundations\" Course, available to all customers!</p>",
+                    "order": "2",
+                    "required": true,
+                    "contentType": "Media",
+                    "duration": "2 minutes",
+                    "instructors": [],
+                    "materials": []
+                },
+                {
+                    "id": "e002de0578491012383b81497cac03c6",
+                    "descriptor": "Navigating the New World of Video Learning",
+                    "description": "<p>Blog post from James Cross on the future of Learning in the workplace, with an emphasis on the emergence of video as a powerful and necessary tool.</p>",
+                    "order": "3",
+                    "required": true,
+                    "contentType": "Media",
+                    "instructors": [],
+                    "materials": []
+                },
+                {
+                    "id": "e002de0578491012383b8176dc0a03c8",
+                    "descriptor": "Work Talk Episode 7: Transforming How We Learn at Work",
+                    "description": "<p><span>Marianne Koch, associate dean and HR program director, Golden Gate University, and James Cross, Workday's director of learning product strategy, describe how to implement workplace learning that will foster employee engagement and business innovation.</span></p>",
+                    "order": "4",
+                    "required": false,
+                    "contentType": "External Content",
+                    "contentURL": "https://www.youtube.com/watch?v=QGoFntYh6dU",
+                    "instructors": [],
+                    "materials": []
+                },
+                {
+                    "id": "e002de0578491012383b81c6694003ca",
+                    "descriptor": "Workday Learning Configuration Workshop",
+                    "description": "<p>Day-long workshop to go through the key configuration options and considerations for a successful Workday Learning implementation.</p>",
+                    "order": "5",
+                    "required": true,
+                    "contentType": "In Person Classroom (Instructor Led)",
+                    "duration": "9 hours",
+                    "instructors": ["Amelia Casias"],
+                    "materials": [],
+                    "trackAttendance": true,
+                    "trackGrades": true
+                }
+            ]
+        }
+    ],
+    "total": 1
+}

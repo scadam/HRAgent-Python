@@ -1,0 +1,158 @@
+{
+    "success": true,
+    "assignments": [
+        {
+            "assignmentStatus": "Completed",
+            "dueDate": "2024-06-30",
+            "learningContent": "Gehaltsverhandlung (Inactive)",
+            "overdue": false,
+            "required": true,
+            "workdayId": "007e10012fd39000f34656bcc04e0000"
+        },
+        {
+            "assignmentStatus": "Open",
+            "dueDate": "2024-06-30",
+            "learningContent": "Viva Learning Workday Integration",
+            "overdue": true,
+            "required": true,
+            "workdayId": "007e10012fd390010b8c5db64ddf0000"
+        },
+        {
+            "assignmentStatus": "Completed",
+            "dueDate": "2024-06-30",
+            "learningContent": "Big Data Technologies and Trends",
+            "overdue": false,
+            "required": true,
+            "workdayId": "007e10012fd390010c16aaf7e2c90000"
+        },
+        {
+            "assignmentStatus": "Completed",
+            "dueDate": "2024-06-30",
+            "learningContent": "Welcome to the Organization! - Himanshu",
+            "overdue": false,
+            "required": true,
+            "workdayId": "007e10012fd390013b8df54e9c880000"
+        },
+        {
+            "assignmentStatus": "Open",
+            "dueDate": "2025-01-31",
+            "learningContent": "Developing Customer Service Skills: Active Listening",
+            "overdue": true,
+            "required": true,
+            "workdayId": "24d150caa0e89000b477f61cce1b0000"
+        },
+        {
+            "assignmentStatus": "Completed",
+            "learningContent": "New Hire Training",
+            "overdue": false,
+            "required": true,
+            "workdayId": "48a94162275d90013e8870991e870000"
+        },
+        {
+            "assignmentStatus": "Open",
+            "learningContent": "Test Effective Date",
+            "overdue": false,
+            "required": true,
+            "workdayId": "48a94162275d90013fef1544f1f50000"
+        },
+        {
+            "assignmentStatus": "Open",
+            "dueDate": "2024-06-14",
+            "learningContent": "Marketing Foundations: The Marketing Funnel (Inactive)",
+            "overdue": true,
+            "required": true,
+            "workdayId": "490d68d2dd9a9000f935e26d3dec0000"
+        },
+        {
+            "assignmentStatus": "Open",
+            "learningContent": "test digital SR 23/10",
+            "overdue": false,
+            "required": true,
+            "workdayId": "490d68d2dd9a9000f99543fbd5f90000"
+        },
+        {
+            "assignmentStatus": "Completed",
+            "dueDate": "2024-05-31",
+            "learningContent": "Gehaltsverhandlung (Inactive)",
+            "overdue": true,
+            "required": true,
+            "workdayId": "490d68d2dd9a9000fc8e306ab9190000"
+        },
+        {
+            "assignmentStatus": "Completed",
+            "dueDate": "2024-06-30",
+            "learningContent": "Onboarding New Hires as a Manager (Inactive)",
+            "overdue": false,
+            "required": true,
+            "workdayId": "75744c9fb1ee9000c282cfdf527a0000"
+        },
+        {
+            "assignmentStatus": "Completed",
+            "dueDate": "2024-07-20",
+            "learningContent": "Onboarding New Hires as a Manager (Inactive)",
+            "overdue": false,
+            "required": true,
+            "workdayId": "75744c9fb1ee900190af255db6330000"
+        },
+        {
+            "assignmentStatus": "Open",
+            "learningContent": "Test Workday Integration",
+            "overdue": false,
+            "required": false,
+            "workdayId": "75744c9fb1ee900190f364f4e66c0000"
+        },
+        {
+            "assignmentStatus": "Completed",
+            "dueDate": "2023-10-31",
+            "learningContent": "Paritosh WD Course",
+            "overdue": true,
+            "required": true,
+            "workdayId": "beafd74aa16b90006494f825045e0000"
+        },
+        {
+            "assignmentStatus": "Open",
+            "learningContent": "Hazardous Materials Management",
+            "overdue": false,
+            "required": false,
+            "workdayId": "e41e00dd48d390010fc428e2b1730000"
+        },
+        {
+            "assignmentStatus": "Open",
+            "learningContent": "Marketing Masterclass",
+            "overdue": false,
+            "required": false,
+            "workdayId": "e41e00dd48d390010fdeb41ddd0f0000"
+        },
+        {
+            "assignmentStatus": "Open",
+            "learningContent": "31 Music Business Tips for Songwriters (Inactive)",
+            "overdue": false,
+            "required": false,
+            "workdayId": "e41e00dd48d390013bfeb4e271a20000"
+        },
+        {
+            "assignmentStatus": "Completed",
+            "dueDate": "2023-11-30",
+            "learningContent": "3ds Max 2018 avanzado: Hair and Fur (Inactive)",
+            "overdue": true,
+            "required": true,
+            "workdayId": "e41e00dd48d390013c09fbfb42e50000"
+        },
+        {
+            "assignmentStatus": "Completed",
+            "dueDate": "2024-10-10",
+            "learningContent": "AutoCAD 2014: Neue Funktionen (Inactive)",
+            "overdue": false,
+            "required": true,
+            "workdayId": "e41e00dd48d390013c185337d6250000"
+        },
+        {
+            "assignmentStatus": "Open",
+            "learningContent": "Advanced Google Ads (2020) (Inactive)",
+            "overdue": false,
+            "required": false,
+            "workdayId": "e41e00dd48d390013c207577d24c0000"
+        }
+    ],
+    "total": 20
+}

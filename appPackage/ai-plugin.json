@@ -1,0 +1,155 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.3/schema.json",
+  "schema_version": "v2.3",
+  "namespace": "workday",
+  "name_for_human": "Workday API",
+  "description_for_human": "Workday functions",
+  "description_for_model": "Workday functions to manage HR tasks.",
+  "logo_url": "https://github.com/scadam/HRAgent/blob/9ef7371f9ba9428f71fbb1efc1efa16bcaf6ad20/wday192.png?raw=true",
+  "functions": [
+    {
+      "name": "getWorker",
+      "description": "Retrieve details of the worker from the Workday system."
+    },
+    {
+      "name": "changeBusinessTitle",
+      "description": "Change my business title in the Workday system."
+    },
+    {
+      "name": "getDirectReports",
+      "description": "Retrieve a list of my direct reports from the Workday system."
+    },
+    {
+      "name": "getInboxTasks",
+      "description": "Retrieve a list of my inbox tasks from the Workday system.",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$.tasks",
+          "properties": {
+            "title": "$.descriptor",
+            "subtitle": "$.status"
+          },
+          "static_template": {
+            "file": "./adaptiveCards/inboxTaskCard.json"
+          }
+        }
+      }
+    },
+    {
+      "name": "getPaySlips",
+      "description": "Retrieve a list of my recent payslips from the Workday system."
+    },
+    {
+      "name": "getTimeOffEntries",
+      "description": "Retrieve a list of my time off entries from the Workday system."
+    },
+    {
+      "name": "searchLearningContent",
+      "description": "Search for learning content available to me in the Workday system for specific skills and topics.",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$.content",
+          "properties": {
+            "title": "$.descriptor",
+            "subtitle": "$.skillLevel"
+          },
+          "static_template": {
+            "file": "./adaptiveCards/learningContentCard.json"
+          }
+        }
+      }
+    },
+    {
+      "name": "getLearningAssignments",
+      "description": "Retrieve a list of my learning assignments from the Workday system.",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$.assignments",
+          "properties": {
+            "title": "$.learningContent",
+            "subtitle": "$.dueDate"
+          },
+          "static_template": {
+            "file": "./adaptiveCards/learningAssignmentCard.json"
+          }
+        }
+      }
+    },
+    {
+      "name": "getLeaveBalances",
+      "description": "Retrieve my leave balances from the Workday system."
+    },
+    {
+      "name": "requestLeave",
+      "description": "Request leave in the Workday system.",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$",
+          "static_template": {
+            "file": "./adaptiveCards/leaveRequestCard.json"
+          }
+        }
+      }
+    },
+    {
+      "name": "bookLeave",
+      "description": "Internal use only.",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$",
+          "static_template": {
+            "file": "./adaptiveCards/bookLeaveCard.json"
+          }
+        }
+      }
+    }
+  ],
+  "runtimes": [
+    {
+      "type": "OpenApi",
+      "auth": {
+        "type": "OAuthPluginVault",
+        "reference_id": "${{AUTHCODE_CONFIGURATION_ID}}"
+      },
+      "spec": {
+        "url": "apiSpecificationFile/workday.yml",
+        "progress_style": "ShowUsageWithInputAndOutput"
+      },
+      "run_for_functions": [
+        "getWorker", 
+        "changeBusinessTitle",
+        "getDirectReports",
+        "getInboxTasks",
+        "getPaySlips",
+        "getTimeOffEntries",
+        "searchLearningContent",
+        "getLearningAssignments",
+        "getLeaveBalances",
+        "requestLeave",
+        "bookLeave"
+      ]
+    }
+  ],
+  "capabilities": {
+    "conversation_starters": [
+      {
+        "text": "Get worker profile"
+      },
+      {
+        "text": "Change my business title"
+      },
+      {
+        "text": "Show my direct reports"
+      },
+      {
+        "text": "Show my inbox tasks"
+      },
+      {
+        "text": "Show my recent payslips"
+      },
+      {
+        "text": "Show my time off balance and recent requests"
+      }
+    ]
+  }
+}

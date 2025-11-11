@@ -1,0 +1,69 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.5/schema.json",
+    "version": "v1.5",
+    "name": "HR AI Agent (${{APP_NAME_SUFFIX}})",
+    "description": "An AI-powered HR Agent that helps you manage your HR tasks efficiently within Microsoft 365 Copilot.",
+    "behavior_overrides": {
+        "special_instructions": {
+            "discourage_model_knowledge": true
+        },
+        "suggestions": {
+            "disabled": true
+        }
+    },
+    "disclaimer": {
+        "text": "This app provides access to your Workday data. Please ensure you do not accidentally share your sensitive information with colleagues using this app."
+    },
+    "capabilities": [
+        {
+            "name": "CodeInterpreter"
+        },
+        {
+            "name": "People"
+        },
+        {
+            "name": "Meetings"
+        },
+        {
+            "name": "OneDriveAndSharePoint",
+            "items_by_url": [
+                {
+                    "url": "https://m365cpi81302533.sharepoint.com/sites/GlobalModernServicesHR"
+                }
+            ]
+        }
+    ],
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "Required Learning",
+            "text": "What required learning assignments do I have that are due soon or overdue?"
+        },
+        {
+            "title": "Time Off",
+            "text": "Show my time off requests."
+        },
+        {
+            "title": "Business Title",
+            "text": "I would like to change my business title to '[PLACEHOLDER]'."
+        },
+        {
+            "title": "Recent Payslips",
+            "text": "Show me my last 3 payslips."
+        },
+        {
+            "title": "Inbox Tasks",
+            "text": "What tasks do I have in my Workday inbox?"
+        },
+        {
+            "title": "Learning Content",
+            "text": "Find learning content for 'Workday Learning'."
+        }
+    ],
+    "actions": [
+        {
+            "id": "workdayPlugin_a",
+            "file": "ai-plugin.json"
+        }
+    ]
+}

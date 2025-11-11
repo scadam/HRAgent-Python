@@ -1,0 +1,428 @@
+{
+    "success": true,
+    "requestParameters": {
+        "startDate": "2025-10-07",
+        "endDate": "2025-10-07",
+        "quantity": "1",
+        "unit": "Days",
+        "reason": "Vacation"
+    },
+    "eligibleAbsenceTypes": [
+        {
+            "category": "Leave of Absence Type",
+            "name": "Bereavement Leave",
+            "id": "b8fbb5eb656b4c4b86995e869241804a",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Education",
+            "id": "29a22c88eb2348489af4f8357e26c166",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Emergency Leave",
+            "id": "320648d179334f3fb7bd006bc3590e76",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Extended Bereavement Leave",
+            "id": "7791a29c897742de905f4246e294cc2f",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Extended Jury Duty / Court Subpoena",
+            "id": "8b5297cd5977494c8bfd2af3e58539bf",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Time Off",
+            "name": "Floating Holiday (Hours)",
+            "id": "1ae16ba1c7e1458da879bbcff3e07d7f",
+            "unit": "Hours",
+            "dailyDefaultQuantity": "8",
+            "group": "Time Off",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Health Condition / Third Party Sick Pay",
+            "id": "3beb845b3c1c4f8c864df6b298b61390",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Injury at Work",
+            "id": "69c981b5df494a098644a6403cb4a3bc",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Jury Duty",
+            "id": "0047310f6ac043f6ab3a854438426195",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Military: Caregiver for Family Veteran",
+            "id": "908c5f3beeb44d59ba5059bf19b62179",
+            "unit": "Hours",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Military: Family on Active Duty",
+            "id": "db5342b43eea40bea3f1ee7116ad975e",
+            "unit": "Hours",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Military Service",
+            "id": "bd890f235bec43b5a685c3864947b442",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Personal Leave-Less Than 3 Months",
+            "id": "96b6dbab5a7e4b43ae5799a493440a0d",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Personal Leave-More Than 3 Months",
+            "id": "2b2d8f878bff4f198a20607b472fd8a7",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Planned Leave",
+            "id": "99c4800b9a4f4f97915a945596d366ba",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "Qualifying Health Condition (Self/Family)",
+            "id": "2325cc7309c348b9b7644fe2270e425a",
+            "unit": "Hours",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Time Off",
+            "name": "Sick (Hours)",
+            "id": "8034e23382874b1ba72774a1cff824c3",
+            "unit": "Hours",
+            "dailyDefaultQuantity": "8",
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Time Off",
+            "name": "U.S. Intermittent FMLA (Hours)",
+            "id": "5693185367fe4582b732b896f3ce99cf",
+            "unit": "Hours",
+            "dailyDefaultQuantity": "8",
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "USA Long Term Disability",
+            "id": "3d2548a1fd43491a96c14c156499ef03",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        },
+        {
+            "category": "Leave of Absence Type",
+            "name": "USA Short Term Disability",
+            "id": "d17c5849a264493b8a127e8806bb5edb",
+            "unit": "Days",
+            "dailyDefaultQuantity": null,
+            "group": "Other Absence Types",
+            "startAndEndTimeRequired": false,
+            "calculateQuantityBasedOnTime": false,
+            "defaultStartTime": "08:00:00.000Z",
+            "defaultEndTime": "17:00:00.000Z"
+        }
+    ],
+    "leaveBalances": [
+        {
+            "planName": "Floating Holiday",
+            "planId": "555f46d5f3134d88aed52bcb009d4406",
+            "balance": "16",
+            "unit": "Hours",
+            "effectiveDate": "2025-10-05",
+            "timeOffTypes": "(Floating Holiday (Hours))"
+        },
+        {
+            "planName": "Paid Time Off",
+            "planId": "b6e85821e919444dbebadcd445390646",
+            "balance": "80.06",
+            "unit": "Hours",
+            "effectiveDate": "2025-10-05",
+            "timeOffTypes": "(Sick (Hours), Vacation (Hours))"
+        },
+        {
+            "planName": "Time Off Law",
+            "planId": "5d8f6407ccb4100202bd13b79eee0000",
+            "balance": "0",
+            "unit": "Hours",
+            "effectiveDate": "2025-10-05",
+            "timeOffTypes": ""
+        },
+        {
+            "planName": "Vacation",
+            "planId": "d4f525c8798a404f8d14b73a877e6a37",
+            "balance": "0",
+            "unit": "Hours",
+            "effectiveDate": "2025-10-05",
+            "timeOffTypes": "(Vacation (Hours))"
+        }
+    ],
+    "bookedTimeOff": [
+        {
+            "date": "2025-02-21",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "Requesting 1 day off to visit a friend."
+        },
+        {
+            "date": "2025-03-31",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "Requesting 1 day off for personal reasons."
+        },
+        {
+            "date": "2025-04-01",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "Requesting 1 day off for personal reasons."
+        },
+        {
+            "date": "2025-04-02",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "Requesting 1 day off for personal reasons."
+        },
+        {
+            "date": "2025-04-03",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "Requesting 1 day off for personal reasons."
+        },
+        {
+            "date": "2025-04-04",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "Requesting 1 day off for personal reasons."
+        },
+        {
+            "date": "2025-04-23",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "Requesting 1 day off to visit the dentist."
+        },
+        {
+            "date": "2025-07-07",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "Requesting 1 day off for personal reasons."
+        },
+        {
+            "date": "2025-08-04",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "Requesting 5 days off for vacation."
+        },
+        {
+            "date": "2025-08-18",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": ""
+        },
+        {
+            "date": "2025-08-19",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": ""
+        },
+        {
+            "date": "2025-08-20",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": ""
+        },
+        {
+            "date": "2025-08-21",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": ""
+        },
+        {
+            "date": "2025-08-22",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": ""
+        },
+        {
+            "date": "2025-08-29",
+            "timeOffType": "Vacation (Hours)",
+            "quantity": "8",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "Requesting 1 day off for personal reasons."
+        },
+        {
+            "date": "2025-10-23",
+            "timeOffType": "Floating Holiday (Hours)",
+            "quantity": "2",
+            "unit": "Hours",
+            "status": "Submitted",
+            "comment": "fingers crossed"
+        }
+    ],
+    "workdayId": "e422b367a0060101745c25d2d88e0000",
+    "bookingGuidance": {
+        "timeFormat": "ISO 8601 with timezone (e.g., 2025-02-25T08:00:00.000Z)",
+        "defaultWorkingHours": {
+            "start": "08:00:00.000Z",
+            "end": "17:00:00.000Z"
+        },
+        "quantityCalculation": {
+            "forHours": "Use dailyDefaultQuantity * number of days",
+            "forDays": "Use 1 per day requested"
+        }
+    }
+}

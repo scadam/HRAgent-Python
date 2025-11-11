@@ -1,0 +1,42 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.23",
+  "id": "${{TEAMS_APP_ID}}",
+  "version": "1.1.6",
+  "developer": {
+    "name": "Scott Adams, M365 Copilot",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "hair192.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "HR Agent",
+    "full": "HR Agent"
+  },
+  "description": {
+    "short": "Agent that helps you manage your HR tasks.",
+    "full": "An AI-powered HR Agent that helps you manage your HR tasks efficiently within Microsoft 365 Copilot."
+  },
+  "accentColor": "#FFFFFF",
+  "copilotAgents": {
+    "declarativeAgents": [
+      {
+        "id": "workdayDeclarativeAgent",
+        "file": "workdayDeclarativeAgent.json"
+      }
+    ]
+  },
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "www.pngkit.com",
+    "wd2-impl-services1.workday.com",
+    "${{OPENAPI_SERVER_DOMAIN}}"
+  ]
+}

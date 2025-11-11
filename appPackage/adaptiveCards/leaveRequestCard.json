@@ -1,0 +1,385 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "https://www.pngkit.com/png/detail/343-3439153_workday-logo-workday.png",
+                  "width": "32px",
+                  "height": "28px"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Time Off Request",
+                  "weight": "Bolder",
+                  "size": "Large",
+                  "color": "Accent"
+                }
+              ],
+              "verticalContentAlignment": "Center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "style": "default",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Leave Balances",
+          "weight": "Bolder",
+          "size": "Medium",
+          "spacing": "Medium"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "$data": "${$root.leaveBalances}",
+              "type": "ColumnSet",
+              "$when": "${balance != '0' && balance != null && balance != ''}",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "${planName}",
+                      "weight": "Bolder"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "${balance} ${unit}",
+                      "horizontalAlignment": "Right",
+                      "color": "Good"
+                    }
+                  ]
+                }
+              ],
+              "separator": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "New Leave Request",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "Input.Date",
+          "id": "startDate",
+          "label": "Start Date",
+          "value": "${requestParameters.startDate}",
+          "isRequired": true
+        },
+        {
+          "type": "Input.Date",
+          "id": "endDate",
+          "label": "End Date",
+          "value": "${requestParameters.endDate}",
+          "isRequired": true
+        },
+        {
+          "type": "Input.ChoiceSet",
+          "id": "timeOffTypeId",
+          "label": "Leave Type",
+          "value": "e7363fe834bd4c2883d36652ac6c979a",
+          "isRequired": true,
+          "choices": [
+            {
+              "title": "Vacation (Hours)",
+              "value": "e7363fe834bd4c2883d36652ac6c979a"
+            },
+            {
+              "title": "Floating Holiday (Hours)",
+              "value": "1ae16ba1c7e1458da879bbcff3e07d7f"
+            }
+          ]
+        },
+        {
+          "type": "Input.Text",
+          "id": "quantity",
+          "label": "Hours (for partial days)",
+          "placeholder": "Default: 8 hours per day",
+          "value": "${requestParameters.quantity}"
+        },
+        {
+          "type": "Input.Text",
+          "id": "reason",
+          "label": "Reason",
+          "value": "${requestParameters.reason}",
+          "isMultiline": true,
+          "placeholder": "Enter reason for leave request"
+        }
+      ]
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Execute",
+          "title": "Submit Request",
+          "verb": "bookLeave",
+          "data": {
+            "startDate": "${startDate}",
+            "endDate": "${endDate}",
+            "timeOffTypeId": "${timeOffTypeId}",
+            "quantity": "${quantity}",
+            "reason": "${reason}",
+            "unit": "${unit}"
+          },
+          "style": "positive"
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "style": "default",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "📅 View Current Time Off Requests",
+              "targetElements": [
+                "bookedTimeOffContainer"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "id": "bookedTimeOffContainer",
+          "isVisible": false,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Current Time Off Requests",
+              "weight": "Bolder",
+              "size": "Medium",
+              "spacing": "Medium"
+            },
+            {
+              "type": "Container",
+              "items": [
+                {
+                  "$data": "${$root.bookedTimeOff}",
+                  "type": "Container",
+                  "style": "emphasis",
+                  "spacing": "Small",
+                  "items": [
+                    {
+                      "type": "ColumnSet",
+                      "columns": [
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "${date}",
+                              "weight": "Bolder",
+                              "size": "Small"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Column",
+                          "width": "stretch",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "${timeOffType}",
+                              "size": "Small"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "${quantity} ${unit}",
+                              "size": "Small",
+                              "horizontalAlignment": "Right"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "${status}",
+                              "size": "Small",
+                              "color": "${if(status == 'Approved', 'Good', if(status == 'Submitted', 'Warning', 'Attention'))}",
+                              "horizontalAlignment": "Right"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "${comment}",
+                      "size": "Small",
+                      "color": "Dark",
+                      "wrap": true,
+                      "spacing": "None",
+                      "$when": "${comment != ''}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "style": "default",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.ToggleVisibility",
+              "title": "📋 View Eligible Absence Types",
+              "targetElements": [
+                "eligibleAbsenceContainer"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "id": "eligibleAbsenceContainer",
+          "isVisible": false,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Eligible Absence Types",
+              "weight": "Bolder",
+              "size": "Medium",
+              "spacing": "Medium"
+            },
+            {
+              "type": "Container",
+              "items": [
+                {
+                  "$data": "${$root.eligibleAbsenceTypes}",
+                  "type": "Container",
+                  "style": "emphasis",
+                  "spacing": "Small",
+                  "items": [
+                    {
+                      "type": "ColumnSet",
+                      "columns": [
+                        {
+                          "type": "Column",
+                          "width": "stretch",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "${name}",
+                              "weight": "Bolder",
+                              "size": "Small"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "${category}",
+                              "size": "Small",
+                              "color": "Accent"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ColumnSet",
+                      "columns": [
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "Unit: ${unit}",
+                              "size": "Small",
+                              "color": "Dark"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Column",
+                          "width": "stretch",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "Group: ${group}",
+                              "size": "Small",
+                              "color": "Dark"
+                            }
+                          ]
+                        }
+                      ],
+                      "spacing": "None"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+# yaml-language-server: $schema=https://aka.ms/m365-agents-toolkits/v1.9/yaml.schema.json
+# Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
+# Visit https://aka.ms/teamsfx-actions for details on actions
+version: v1.9
+
+environmentFolderPath: ./env
+
+# Triggered when 'teamsapp provision' is executed
+provision:
+  # Creates an app
+  - uses: teamsApp/create
+    with:
+      # app name
+      name: HRAgent${{APP_NAME_SUFFIX}}
+    # Write the information of created resources into environment file for
+    # the specified environment variable(s).
+    writeToEnvironmentFile:
+      teamsAppId: TEAMS_APP_ID
+
+  # Apply the Microsoft Entra manifest to an existing Microsoft Entra app. Will use the object id in
+  # manifest file to determine which Microsoft Entra app to update.
+  #- uses: aadApp/update
+  #  with:
+  #    # Relative path to this file. Environment variables in manifest will
+  #    # be replaced before apply to Microsoft Entra app
+  #    manifestPath: ./aad.manifest.json
+  #    outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
+  #    # This will update the AAD app with the new scope
+  - uses: arm/deploy
+    with:
+      subscriptionId: ${{AZURE_SUBSCRIPTION_ID}}
+      resourceGroupName: ${{AZURE_RESOURCE_GROUP_NAME}}
+      templates:
+        - path: ./infra/azure.bicep
+          parameters: ./infra/azure.parameters.json
+          deploymentName: hr-agent-python-${{TEAMSFX_ENV}}
+      bicepCliVersion: v0.21.1
+
+  - uses: oauth/update
+    with:
+      name: aadAuthCode
+      appId: ${{TEAMS_APP_ID}}
+      # Path to OpenAPI description document
+      apiSpecPath: ./appPackage/apiSpecificationFile/workday.yml
+      configurationId: ${{AUTHCODE_CONFIGURATION_ID}}
+  # Build app package with latest env value
+  - uses: teamsApp/zipAppPackage
+    with:
+      # Path to manifest template
+      manifestPath: ./appPackage/manifest.json
+      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputFolder: ./appPackage/build
+
+  # Validate app package using validation rules
+  - uses: teamsApp/validateAppPackage
+    with:
+      # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+
+  # Apply the app manifest to an existing app in
+  # Developer Portal.
+  # Will use the app id in manifest file to determine which app to update.
+  - uses: teamsApp/update
+    with:
+      # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+
+  # Extend your app to Outlook and the Microsoft 365 app
+  - uses: teamsApp/extendToM365
+    with:
+      # Relative path to the build app package.
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+    # Write the information of created resources into environment file for
+    # the specified environment variable(s).
+    writeToEnvironmentFile:
+      titleId: M365_TITLE_ID
+      appId: M365_APP_ID
+
+# Triggered when 'teamsapp deploy' is executed
+deploy:
+  # Install Azure Functions Core Tools to drive one deploy
+  - uses: devTool/install
+    with:
+      func:
+        version: ^4.0.5530
+        symlinkDir: ./devTools/func
+    writeToEnvironmentFile:
+      funcPath: FUNC_PATH
+
+  # Publish using Azure Functions Core Tools (one deploy for Flex Consumption)
+  - uses: script
+    name: publish function app
+    with:
+      run: powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/publish-function.ps1
+
+# Triggered when 'teamsapp publish' is executed
+publish:
+  # Build app package with latest env value
+  - uses: teamsApp/zipAppPackage
+    with:
+      # Path to manifest template
+      manifestPath: ./appPackage/manifest.json
+      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputFolder: ./appPackage/build
+  # Validate app package using validation rules
+  - uses: teamsApp/validateAppPackage
+    with:
+      # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+  # Apply the app manifest to an existing app in
+  # Developer Portal.
+  # Will use the app id in manifest file to determine which app to update.
+  - uses: teamsApp/update
+    with:
+      # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+  # Publish the app to
+  # Teams Admin Center (https://admin.teams.microsoft.com/policies/manage-apps)
+  # for review and approval
+  - uses: teamsApp/publishAppPackage
+    with:
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+    # Write the information of created resources into environment file for
+    # the specified environment variable(s).
+    writeToEnvironmentFile:
+      publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
+projectId: d37059fe-83a9-4ef6-95b8-90482e0e5194

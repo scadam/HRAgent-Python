@@ -1,0 +1,724 @@
+openapi: 3.0.0
+info:
+  title: Workday HR Agent API
+  description: API for HR operations using Workday integration
+  version: 1.0.0
+servers:
+  - url: ${{OPENAPI_SERVER_URL}}/api
+    description: Production server
+paths:
+  /bookLeave:
+    post:
+      summary: Book time off for authenticated user
+      description: Books time off in Workday based on parameters from adaptive card Action.Execute. Creates multiple day entries for date ranges as required by Workday.
+      operationId: bookLeave
+      x-openai-isConsequential: false
+      security:
+        - aadAuthCode: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                startDate:
+                  type: string
+                  description: The start date of the leave (YYYY-MM-DD)
+                endDate:
+                  type: string
+                  description: The end date of the leave (YYYY-MM-DD)
+                quantity:
+                  type: string
+                  description: Daily quantity of leave (e.g., "8" for hours, "1" for days)
+                unit:
+                  type: string
+                  description: Unit of measurement (Hours or Days)
+                reason:
+                  type: string
+                  description: Reason for the leave request
+                timeOffTypeId:
+                  type: string
+                  description: Time off type ID from eligible absence types
+      responses:
+        '200':
+          description: Time off request submitted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request - missing required fields
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /requestLeave:
+    post:
+      summary: Prepare leave request information for authenticated user
+      description: Prepares comprehensive leave information including balances, eligible absence types, and booking guidance for display in adaptive cards. Does not actually book the leave.
+      operationId: requestLeave
+      x-openai-isConsequential: false
+      security:
+        - aadAuthCode: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                startDate:
+                  type: string
+                  format: date
+                  description: The start date of the leave (YYYY-MM-DD). Defaults to tomorrow if not provided.
+                endDate:
+                  type: string
+                  format: date
+                  description: The end date of the leave (YYYY-MM-DD). Defaults to tomorrow if not provided.
+                quantity:
+                  type: string
+                  description: The quantity of leave per day. Defaults to "1".
+                  default: "1"
+                unit:
+                  type: string
+                  description: The unit of measurement (Days or Hours). Defaults to "Days".
+                  enum: ["Days", "Hours"]
+                  default: "Days"
+                reason:
+                  type: string
+                  description: The reason for the leave request. Defaults to "Vacation".
+                  default: "Vacation"
+      responses:
+        '200':
+          description: Leave request information prepared successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  requestParameters:
+                    type: object
+                    properties:
+                      startDate:
+                        type: string
+                        format: date
+                        description: Echoed start date
+                      endDate:
+                        type: string
+                        format: date
+                        description: Echoed end date
+                      quantity:
+                        type: string
+                        description: Echoed quantity
+                      unit:
+                        type: string
+                        description: Echoed unit
+                      reason:
+                        type: string
+                        description: Echoed reason
+                  eligibleAbsenceTypes:
+                    type: array
+                    description: List of absence types the user is eligible for
+                    items:
+                      type: object
+                      properties:
+                        category:
+                          type: string
+                          description: Category of absence (e.g., "Time Off", "Leave of Absence Type")
+                        name:
+                          type: string
+                          description: Display name of the absence type
+                        id:
+                          type: string
+                          description: Unique identifier for booking operations
+                        unit:
+                          type: string
+                          description: Unit of measurement (Hours or Days)
+                        dailyDefaultQuantity:
+                          type: string
+                          description: Default quantity per day for hour-based requests
+                          nullable: true
+                        group:
+                          type: string
+                          description: Absence type group
+                        startAndEndTimeRequired:
+                          type: boolean
+                          description: Whether start/end times are required
+                        calculateQuantityBasedOnTime:
+                          type: boolean
+                          description: Whether quantity is calculated based on time
+                        defaultStartTime:
+                          type: string
+                          description: Default start time for booking
+                        defaultEndTime:
+                          type: string
+                          description: Default end time for booking
+                  leaveBalances:
+                    type: array
+                    description: Current leave balances for all plans
+                    items:
+                      type: object
+                      properties:
+                        planName:
+                          type: string
+                          description: Name of the leave plan
+                        planId:
+                          type: string
+                          description: Unique identifier of the leave plan
+                        balance:
+                          type: string
+                          description: Current balance amount
+                        unit:
+                          type: string
+                          description: Unit of measurement
+                        effectiveDate:
+                          type: string
+                          format: date
+                          description: Effective date of the balance
+                        timeOffTypes:
+                          type: string
+                          description: Associated time off types
+                  bookedTimeOff:
+                    type: array
+                    description: Already booked time off entries
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                          description: Date of the time off
+                        timeOffType:
+                          type: string
+                          description: Type of time off
+                        quantity:
+                          type: string
+                          description: Quantity of time off
+                        unit:
+                          type: string
+                          description: Unit of measurement
+                        status:
+                          type: string
+                          description: Status of the request
+                        comment:
+                          type: string
+                          description: Comment or reason
+                  workdayId:
+                    type: string
+                    description: Worker's Workday ID for subsequent operations
+                  bookingGuidance:
+                    type: object
+                    description: Guidance for booking operations
+                    properties:
+                      timeFormat:
+                        type: string
+                        description: Required time format for booking API
+                      defaultWorkingHours:
+                        type: object
+                        properties:
+                          start:
+                            type: string
+                            description: Default start time
+                          end:
+                            type: string
+                            description: Default end time
+                      quantityCalculation:
+                        type: object
+                        properties:
+                          forHours:
+                            type: string
+                            description: How to calculate quantity for hour-based requests
+                          forDays:
+                            type: string
+                            description: How to calculate quantity for day-based requests
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /getLeaveBalances:
+    get:
+      summary: Get leave balances for authenticated user
+      description: Retrieves leave balances for the authenticated user from Workday
+      operationId: getLeaveBalances
+      responses:
+        '200':
+          description: Leave balances retrieved successfully
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /changeBusinessTitle:
+    post:
+      summary: Change business title for authenticated user
+      description: Allows users to change their business title in Workday
+      operationId: changeBusinessTitle
+      security:
+        - aadAuthCode: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                proposedBusinessTitle:
+                  type: string
+                  description: The new business title to set
+              required:
+                - proposedBusinessTitle
+      responses:
+        '200':
+          description: Business title change request submitted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  changeDetails:
+                    type: object
+        '400':
+          description: Bad request - missing required fields
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /getDirectReports:
+    get:
+      summary: Get direct reports for authenticated user
+      description: Retrieves direct reports for the authenticated user from Workday
+      operationId: getDirectReports
+      responses:
+        '200':
+          description: Direct reports retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  directReports:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        isManager:
+                          type: boolean
+                        primaryWorkPhone:
+                          type: string
+                        primaryWorkEmail:
+                          type: string
+                        primarySupervisoryOrganization:
+                          type: string
+                        businessTitle:
+                          type: string
+                        descriptor:
+                          type: string
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /getInboxTasks:
+    get:
+      summary: Get inbox tasks for authenticated user
+      description: Retrieves inbox tasks for the authenticated user from Workday
+      operationId: getInboxTasks
+      responses:
+        '200':
+          description: Inbox tasks retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  tasks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        assigned:
+                          type: string
+                          format: date-time
+                        due:
+                          type: string
+                          format: date-time
+                        initiator:
+                          type: string
+                        status:
+                          type: string
+                        stepType:
+                          type: string
+                        subject:
+                          type: string
+                        overallProcess:
+                          type: string
+                        descriptor:
+                          type: string
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /getLearningAssignments:
+    get:
+      summary: Get learning assignments for authenticated user
+      description: Retrieves learning assignments for the authenticated user from Workday
+      operationId: getLearningAssignments
+      responses:
+        '200':
+          description: Learning assignments retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  assignments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        assignmentStatus:
+                          type: string
+                        dueDate:
+                          type: string
+                          format: date
+                        learningContent:
+                          type: string
+                        overdue:
+                          type: boolean
+                        required:
+                          type: boolean
+                        workdayId:
+                          type: string
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /getPaySlips:
+    get:
+      summary: Get pay slips for authenticated user
+      description: Retrieves pay slips for the authenticated user from Workday
+      operationId: getPaySlips
+      responses:
+        '200':
+          description: Pay slips retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  paySlips:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        gross:
+                          type: string
+                        status:
+                          type: string
+                        net:
+                          type: string
+                        date:
+                          type: string
+                          format: date-time
+                        descriptor:
+                          type: string
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /getTimeOffEntries:
+    get:
+      summary: Get time off entries for authenticated user
+      description: Retrieves time off entries for the authenticated user from Workday
+      operationId: getTimeOffEntries
+      responses:
+        '200':
+          description: Time off entries retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  timeOffEntries:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        employee:
+                          type: string
+                        timeOffRequestStatus:
+                          type: string
+                        timeOffRequestDescriptor:
+                          type: string
+                        unitOfTime:
+                          type: string
+                        timeOffPlan:
+                          type: string
+                        timeOffDescriptor:
+                          type: string
+                        date:
+                          type: string
+                          format: date-time
+                        units:
+                          type: string
+                        descriptor:
+                          type: string
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /searchLearningContent:
+    get:
+      summary: Search learning content
+      description: Searches for learning content and retrieves associated lessons from Workday
+      operationId: searchLearningContent
+      parameters:
+        - name: skills
+          in: query
+          description: Skills to filter by (can be multiple)
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: topics
+          in: query
+          description: Topics to filter by (can be multiple)
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+      responses:
+        '200':
+          description: Learning content retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  content:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        descriptor:
+                          type: string
+                        description:
+                          type: string
+                        contentNumber:
+                          type: string
+                        contentURL:
+                          type: string
+                        version:
+                          type: string
+                        createdOnDate:
+                          type: string
+                          format: date-time
+                        averageRating:
+                          type: string
+                        ratingCount:
+                          type: string
+                        popularity:
+                          type: string
+                        contentType:
+                          type: string
+                        contentProvider:
+                          type: string
+                        accessType:
+                          type: string
+                        deliveryMode:
+                          type: string
+                        skillLevel:
+                          type: string
+                        lifecycleStatus:
+                          type: string
+                        availabilityStatus:
+                          type: string
+                        excludeFromRecommendations:
+                          type: boolean
+                        excludeFromSearchAndBrowse:
+                          type: boolean
+                        learningCatalogs:
+                          type: array
+                          items:
+                            type: string
+                        languages:
+                          type: array
+                          items:
+                            type: string
+                        skills:
+                          type: array
+                          items:
+                            type: string
+                        topics:
+                          type: array
+                          items:
+                            type: string
+                        securityCategories:
+                          type: array
+                          items:
+                            type: string
+                        contactPersons:
+                          type: array
+                          items:
+                            type: string
+                        imageURL:
+                          type: string
+                        lessons:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              descriptor:
+                                type: string
+                              description:
+                                type: string
+                              order:
+                                type: string
+                              required:
+                                type: boolean
+                              contentType:
+                                type: string
+                              duration:
+                                type: string
+                              contentURL:
+                                type: string
+                              instructors:
+                                type: array
+                                items:
+                                  type: string
+                              materials:
+                                type: array
+                                items:
+                                  type: string
+                              activityType:
+                                type: string
+                              virtualClassroomURL:
+                                type: string
+                              location:
+                                type: string
+                              trackAttendance:
+                                type: boolean
+                              trackGrades:
+                                type: boolean
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /getWorker:
+    get:
+      summary: Get worker information for authenticated user
+      description: Retrieves worker information for the authenticated user from Workday
+      operationId: getWorker
+      responses:
+        '200':
+          description: Worker information retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  worker:
+                    type: object
+                    properties:
+                      isManager:
+                        type: boolean
+                      primaryWorkPhone:
+                        type: string
+                      primaryWorkEmail:
+                        type: string
+                      primarySupervisoryOrganization:
+                        type: string
+                      businessTitle:
+                        type: string
+                      descriptor:
+                        type: string
+                      additionalJobClassifications:
+                        type: array
+                        items:
+                          type: string
+                      workerType:
+                        type: string
+                      primaryWorkAddress:
+                        type: string
+                      timeType:
+                        type: string
+                      primaryPosition:
+                        type: string
+                      terminationDate:
+                        type: string
+                        format: date
+                      hireDate:
+                        type: string
+                        format: date
+                      originalHireDate:
+                        type: string
+                        format: date
+                      continuousServiceDate:
+                        type: string
+                        format: date
+                      seniorityDate:
+                        type: string
+                        format: date
+                      payrollFile:
+                        type: string
+                      userName:
+                        type: string
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+components:
+  securitySchemes:
+    aadAuthCode:
+      type: oauth2
+      description: Workday OAuth2 flow
+      flows:
+        authorizationCode:
+          authorizationUrl: https://impl.workday.com/microsoft_dpt6/authorize
+          tokenUrl: https://wd2-impl-services1.workday.com/ccx/oauth2/microsoft_dpt6/token
+          refreshUrl: https://wd2-impl-services1.workday.com/ccx/oauth2/microsoft_dpt6/token
+          scopes: {}
+security:
+  - aadAuthCode: []

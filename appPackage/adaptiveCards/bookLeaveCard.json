@@ -1,0 +1,132 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "https://www.pngkit.com/png/detail/343-3439153_workday-logo-workday.png",
+                  "width": "32px",
+                  "height": "32px"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${if(success, '✅ Leave Request Submitted', '❌ Leave Request Failed')}",
+                  "weight": "Bolder",
+                  "size": "Large",
+                  "color": "${if(success, 'Good', 'Attention')}"
+                }
+              ],
+              "verticalContentAlignment": "Center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "style": "default",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "${if(success, message, errorMessage)}",
+          "wrap": true,
+          "size": "Medium",
+          "color": "${if(success, 'Default', 'Attention')}"
+        }
+      ],
+      "when": "${message != null || errorMessage != null}"
+    },
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Request Details",
+          "weight": "Bolder",
+          "size": "Medium"
+        },
+        {
+          "type": "FactSet",
+          "facts": [
+            {
+              "title": "Start Date:",
+              "value": "${formatDateTime(startDate, 'MMM dd, yyyy')}"
+            },
+            {
+              "title": "End Date:",
+              "value": "${formatDateTime(endDate, 'MMM dd, yyyy')}"
+            },
+            {
+              "title": "Leave Type:",
+              "value": "${timeOffType}"
+            },
+            {
+              "title": "Duration:",
+              "value": "${quantity} ${unit}"
+            },
+            {
+              "title": "Reason:",
+              "value": "${reason}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "style": "default",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Request ID: ${requestId}",
+          "size": "Small",
+          "color": "Dark"
+        }
+      ],
+      "when": "${requestId != null && success == true}"
+    },
+    {
+      "type": "Container",
+      "style": "attention",
+      "spacing": "Medium",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "⚠️ Error Details",
+          "weight": "Bolder",
+          "color": "Attention"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${error}",
+          "wrap": true,
+          "color": "Attention",
+          "size": "Small"
+        }
+      ],
+      "when": "${success == false && error != null}"
+    }
+  ]
+}

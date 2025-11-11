@@ -1,0 +1,277 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Learning Content Results",
+      "weight": "Bolder",
+      "size": "Large",
+      "spacing": "Medium"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Container",
+          "style": "emphasis",
+          "spacing": "Medium",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "${if(imageURL, imageURL, 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0iIzAwNzFDNSIvPgo8cGF0aCBkPSJNMTIgMTJIMjhWMjhIMTJWMTJaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+')}",
+                      "size": "Small",
+                      "style": "Person"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "${descriptor}",
+                      "weight": "Bolder",
+                      "size": "Medium",
+                      "wrap": true
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "${contentNumber} • ${contentType} • ${skillLevel}",
+                      "weight": "Lighter",
+                      "size": "Small",
+                      "color": "Accent",
+                      "spacing": "None"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "${if(description, description, 'No description available')}",
+                      "wrap": true,
+                      "maxLines": 3,
+                      "spacing": "Small"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "FactSet",
+              "facts": [
+                {
+                  "title": "Provider:",
+                  "value": "${contentProvider}"
+                },
+                {
+                  "title": "Delivery:",
+                  "value": "${deliveryMode}"
+                },
+                {
+                  "title": "Access:",
+                  "value": "${accessType}"
+                },
+                {
+                  "title": "Status:",
+                  "value": "${availabilityStatus}"
+                }
+              ],
+              "spacing": "Medium"
+            },
+            {
+              "type": "Container",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "📚 Topics: ${join(topics, ', ')}",
+                  "wrap": true,
+                  "size": "Small",
+                  "$when": "${count(topics) > 0}"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "🎯 Skills: ${join(skills, ', ')}",
+                  "wrap": true,
+                  "size": "Small",
+                  "$when": "${count(skills) > 0}"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "👨‍🏫 Contact: ${join(contactPersons, ', ')}",
+                  "wrap": true,
+                  "size": "Small",
+                  "$when": "${count(contactPersons) > 0}"
+                }
+              ],
+              "spacing": "Small"
+            },
+            {
+              "type": "ActionSet",
+              "actions": [
+                {
+                  "type": "Action.OpenUrl",
+                  "title": "🚀 Launch Content",
+                  "url": "${contentURL}",
+                  "$when": "${contentURL != null && contentURL != ''}"
+                },
+                {
+                  "type": "Action.ToggleVisibility",
+                  "title": "📖 View Learning Path (${count(lessons)} lessons)",
+                  "targetElements": [
+                    "lessons-${id}"
+                  ],
+                  "$when": "${count(lessons) > 0}"
+                }
+              ],
+              "spacing": "Medium"
+            },
+            {
+              "type": "Container",
+              "id": "lessons-${id}",
+              "isVisible": false,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "📚 Learning Path",
+                  "weight": "Bolder",
+                  "size": "Medium",
+                  "spacing": "Medium"
+                },
+                {
+                  "type": "Container",
+                  "items": [
+                    {
+                      "$data": "${lessons}",
+                      "type": "Container",
+                      "style": "default",
+                      "spacing": "Small",
+                      "items": [
+                        {
+                          "type": "ColumnSet",
+                          "columns": [
+                            {
+                              "type": "Column",
+                              "width": "auto",
+                              "items": [
+                                {
+                                  "type": "TextBlock",
+                                  "text": "${if(required, '🔴', '🔵')}",
+                                  "size": "Small"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Column",
+                              "width": "auto",
+                              "items": [
+                                {
+                                  "type": "TextBlock",
+                                  "text": "${order}.",
+                                  "weight": "Bolder",
+                                  "size": "Small"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Column",
+                              "width": "stretch",
+                              "items": [
+                                {
+                                  "type": "TextBlock",
+                                  "text": "${descriptor}",
+                                  "weight": "Bolder",
+                                  "wrap": true
+                                },
+                                {
+                                  "type": "TextBlock",
+                                  "text": "${contentType}${if(duration, ' • ' + duration, '')}",
+                                  "size": "Small",
+                                  "color": "Accent",
+                                  "spacing": "None"
+                                },
+                                {
+                                  "type": "TextBlock",
+                                  "text": "${if(description, description, 'No description available')}",
+                                  "wrap": true,
+                                  "size": "Small",
+                                  "maxLines": 2,
+                                  "spacing": "Small"
+                                },
+                                {
+                                  "type": "TextBlock",
+                                  "text": "👨‍🏫 Instructors: ${join(instructors, ', ')}",
+                                  "wrap": true,
+                                  "size": "Small",
+                                  "$when": "${count(instructors) > 0}"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Column",
+                              "width": "auto",
+                              "items": [
+                                {
+                                  "type": "ActionSet",
+                                  "actions": [
+                                    {
+                                      "type": "Action.OpenUrl",
+                                      "title": "Launch",
+                                      "url": "${contentURL}",
+                                      "$when": "${contentURL != null && contentURL != ''}"
+                                    },
+                                    {
+                                      "type": "Action.OpenUrl",
+                                      "title": "Launch",
+                                      "url": "${virtualClassroomURL}",
+                                      "$when": "${virtualClassroomURL != null && virtualClassroomURL != '' && (contentURL == null || contentURL == '')}"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Container",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "📍 Location: ${location}",
+                              "size": "Small",
+                              "$when": "${location != null && location != ''}"
+                            },
+                            {
+                              "type": "TextBlock",
+                              "text": "📊 Attendance Tracking: ${if(trackAttendance, 'Yes', 'No')} | Grade Tracking: ${if(trackGrades, 'Yes', 'No')}",
+                              "size": "Small",
+                              "$when": "${trackAttendance != null || trackGrades != null}"
+                            }
+                          ],
+                          "$when": "${location != null || trackAttendance != null || trackGrades != null}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "🔴 Required • 🔵 Optional",
+                  "size": "Small",
+                  "color": "Accent",
+                  "spacing": "Medium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
